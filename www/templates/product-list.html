@@ -1,0 +1,28 @@
+<ion-modal-view>
+  <ion-header-bar align-title="left" class="header-bg">
+    <div class="buttons">
+      <button class="button common-btn" ng-click="closeProList()">关闭</button>
+    </div>
+    <h1 class="title padding-horizontal" style="color: #fff">可添加设备</h1>
+
+    <div class="buttons">
+      <!--<button class="button">扫一扫</button>-->
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <a class="item item-thumbnail-left item-icon-right" ng-repeat="product in newProducts"
+         ng-click="addProduct({{product}})">
+        <img ng-src="{{product.icon}}">
+
+        <h2>{{product.name}}</h2>
+
+        <p>购买日期:{{product.buyDate}}</p>
+
+        <p>绑定状态:{{product.state}}</p>
+
+        <i class="icon ion-ios-arrow-right"></i>
+      </a>
+    </div>
+  </ion-content>
+</ion-modal-view>

@@ -1,0 +1,277 @@
+/*消除顶部标题栏底部横线*/
+.bar-header {
+  border: 0px !important;
+  border-bottom-color: transparent !important;
+  background-image: none;
+  border-bottom: none;
+}
+
+.title-bg {
+  background-color: #f08300;
+}
+
+.common-title {
+  width: 100%;
+  padding-top: 1em;
+  font-size: 1.5em;
+  text-align: center;
+  letter-spacing: .5em;
+  font-weight: bold;
+}
+
+.title-box {
+  padding: .6em 2em;
+  height: 95%;
+  width: 80%;
+  text-align: center;
+  margin: 0 0.5em;
+  font-size: 1em;
+  color: #000;
+  border-radius: 1em;
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+.header-bg {
+  background-color: #f08300;
+}
+
+/*.header-btn{*/
+/*background-color: #f08300;*/
+/*border: 1px solid #f39800;*/
+/*}*/
+.header-btn {
+  background-color: #f08300;
+  border: #f8f4e6;
+}
+
+.clear-ion-content {
+  border-top: none;
+}
+
+.button-bg {
+  background-color: #007aff;
+}
+
+.button-group {
+  margin: 0;
+  padding: 0;
+}
+
+.button-layout {
+  float: left;
+  width: 50%;
+}
+
+.item-clear {
+  border: none;
+}
+
+.back-button {
+  display: inline-block;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.button-corner {
+  font-weight: bold;
+  border-radius: 15px;
+  border: none;
+  width: 50%;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.button-text {
+  text-align: center;
+}
+
+.hot-level-text {
+  color: #e42112;
+}
+
+.low-level-text {
+  color: #11c1f3;
+}
+
+.normal-level-text {
+  color: #f08300;
+}
+
+.detail-img {
+  width: 30%;
+  height: 30%;
+  border-radius: 10em;
+}
+
+.box-clear {
+  border: none;
+}
+
+.col-layout {
+  text-align: center;
+}
+
+.button_vanward {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #0095d9;
+}
+
+.radius-btn {
+  border: none;
+  border-radius: 1.5em;
+}
+
+.common-btn,
+.common-btn:visited {
+  border: none;
+  box-shadow: none;
+  background-color: #f7be2e;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  padding: 9px 23px;
+  text-decoration: none;
+}
+
+.common-btn:active {
+  background-color: #f7be2e;
+  position: relative;
+  top: 1px;
+}
+
+.common-btn:hover {
+  color: #ffffff;
+}
+
+.common-btn:focus {
+  background-color: #f7be2e;
+  position: relative;
+  top: 1px;
+}
+
+.box-clear-layout {
+  padding: 0;
+  margin: 0;
+  height: 10%;
+}
+
+.list-layout {
+  margin-top: .5em;
+  text-align: center;
+}
+
+.content-bg {
+  background-color: #cccccc;
+}
+
+.power-btn {
+  background-color: #0095d9;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 15px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Verdana;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 16px 76px;
+  text-decoration: none;
+}
+
+.power-btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.action-btn {
+  /*background-color:#77b55a;*/
+  -moz-border-radius:42px;
+  -webkit-border-radius:42px;
+  border-radius:42px;
+  border:1px solid #ccc;
+  display:inline-block;
+  cursor:pointer;
+  color:#999;
+  font-family:Arial;
+  font-size:17px;
+  padding:26px 20px;
+  text-decoration:none;
+}
+
+.action-center {
+  border-right: 1px solid #cccccc;
+  border-left: 1px solid #cccccc;
+}
+
+.action-btn-focus {
+  font-weight: bold;
+  background-color: #f08300;
+  color: #ffffff;
+}
+
+.common-layout {
+  margin: .5em 0;
+}
+
+.range {
+
+}
+
+.range::-webkit-slider-runnable-track {
+  display: none;
+}
+
+.range::-moz-range-track {
+  display: none;
+}
+
+.range::-moz-range-track {
+  display: none;
+}
+
+.range:focus::-webkit-slider-runnable-track {
+  display: none;
+}
+
+.range:focus::-moz-range-track {
+  display: none;
+}
+
+.range:focus::-moz-range-track {
+  display: none;
+}
+
+/*.action-btn:visited{*/
+/*color:#fff;*/
+/*background-color:#009eed;*/
+/*border:none;*/
+/*}*/
+/*.action-btn:active {*/
+/*position:relative;*/
+/*top:1px;*/
+/*}*/
+
+.track-pwd{
+  margin: 0 .5em;
+  text-align: center;
+}
+
+.common-icon{
+  width: 90%;
+  height: 90%;
+}
+.common-img{
+  width: 20%;
+  height: 20%;
+  border-radius: 2em;
+}
+
+.input-margin-right-10{
+  margin-right: 10px;
+}

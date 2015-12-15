@@ -1,0 +1,35 @@
+<ion-view>
+  <ion-header-bar align-title="left" class="header-bg">
+    <div class="buttons">
+      <button class="button common-btn" ng-click="proList()">添加设备</button>
+    </div>
+    <h1 class="title" style="text-align: center"></h1>
+
+    <div class="buttons">
+      <button class="button common-btn" ng-click="scan()">扫一扫</button>
+    </div>
+  </ion-header-bar>
+  <ion-content class="clear-ion-content">
+    <div class="list">
+      <div class="item title-bg button-text item-clear">
+        <img class="common-img" ng-src="img/user.jpg">
+
+        <h2 style="color: #ffffff;padding: 1em 0;">下午好，{{User.name}}</h2>
+      </div>
+      <div class="item item-divider">已添加设备</div>
+      <a class="item item-thumbnail-left item-icon-right" ng-repeat="product in products"
+         ng-click="lookProduct(product)">
+        <img ng-src="{{product.icon}}">
+
+        <h2>{{product.name}}</h2>
+
+        <p>购买日期:{{product.buyDate}}</p>
+
+        <p>绑定状态:{{product.state}}</p>
+
+        <i class="icon ion-ios-arrow-right"></i>
+
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

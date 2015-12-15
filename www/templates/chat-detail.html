@@ -1,0 +1,18 @@
+<ion-view>
+  <ion-nav-bar class="title-bg">
+    <ion-nav-back-button class="button-clear" style="color: #ffffff">
+      <i class="icon ion-ios-arrow-left"></i>通知
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content class="padding">
+    <div class="list ">
+      <a class="item item-thumbnail-left">
+        <img src="{{chat.face}}">
+        <p class="padding-vertical">
+          {{chat.lastText}}
+        </p>
+        <small style="float: right;color: #ccc">{{chat.lastTime}}</small>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,22 @@
+<ion-view view-title="Account">
+  <ion-header-bar align-title="left" class="header-bg">
+
+    <h1 class="title" style="text-align: center">个人中心</h1>
+
+  </ion-header-bar>
+  <ion-content>
+    <ion-list>
+      <div class="list">
+        <a class="item item-thumbnail-left" ng-click="product()">
+          <img ng-src="{{User.face}}">
+          <h2>{{User.name}}</h2>
+          <p>手机号码:{{User.phone}}</p>
+        </a>
+        <a class="item item-icon-right" ng-repeat="setting in settings" ng-click="{{setting.method}}">{{setting.title}}
+          <small style="color: #999;margin-left: 10px">{{setting.value}}</small>
+          <i class="icon {{setting.icon}}"></i>
+        </a>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

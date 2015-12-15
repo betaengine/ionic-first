@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-content class="padding">
+    <form ng-submit="doLogin()" style="margin-top: 3em">
+      <div class="text-center">
+        <img class="detail-img" ng-src="img/icon.png">
+      </div>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <input type="text" placeholder="用户名" ng-model="loginData.username" required>
+        </label>
+        <label class="item item-input item-icon-right">
+          <input type="{{pwdModel}}" placeholder="密码" ng-model="loginData.password" required>
+          <label>
+            <div class="checkbox checkbox-input-hidden disable-pointer-events">
+              <input type="checkbox" ng-model="isVisible" ng-change="changePwdModel()">
+              <i ng-class="pwdVisible"></i>
+            </div>
+          </label>
+        </label>
+      </div>
+      <div class="text-center">还没有账号?请<a href="#/register">注册</a></div>
+      <button type="submit" class="button button-block button-positive radius-btn">登录</button>
+    </form>
+  </ion-content>
+</ion-view>

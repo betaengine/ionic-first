@@ -1,0 +1,48 @@
+<ion-modal-view>
+  <ion-header-bar align-title="left" class="header-bg">
+    <div class="buttons">
+      <button class="button common-btn" ng-click="closeProduct()"><i class="icon ion-chevron-left"></i></button>
+    </div>
+    <h1 class="title-box">体验设备--{{Product.name}}</h1>
+
+    <div class="buttons">
+      <button class="button common-btn" ng-click="unBind({{Product}})"><i class="icon ion-gear-b"></i></button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="item button-text item-clear title-bg">
+      <img ng-src="img/reshuiqi.jpg" class="detail-img">
+    </div>
+    <div class="item button-text">
+      实际温度:<h1 style="color: #e42112"><i>{{CurrentTemperature}}</i>℃</h1>
+      设定温度:<h1 ng-class="levelClass"><i>{{SettingTemperature}}</i>℃</h1>
+    </div>
+    <div class="list">
+      <div class="item range range-positive box-clear">
+        <i>30</i>
+        <input type="range" ng-class="range" name="volume" min="30" max="70" ng-model="SettingTemperature"
+               ng-disabled="isModel">
+        <i>70</i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-33" style="text-align: center" ng-click="changeModel('mid')" >
+        <a class="action-btn" ng-class="mid">中温</a>
+      </div>
+      <div class="col-33" style="text-align: center" ng-click="changeModel('common')" >
+        <a class="action-btn" ng-class="common">普通</a>
+      </div>
+      <div class="col-33" style="text-align: center" ng-click="changeModel('fast')" >
+        <a class="action-btn" ng-class="fast">速温</a>
+      </div>
+    </div>
+    <div class="list list-layout">
+      <ionic-timepicker input-obj="timePickerObject">
+        <a><i class="ion-clock">{{OpenTimeText}}</i>
+          <standard-time-meridian etime="timePickerObject.inputEpochTime"></standard-time-meridian>
+        </a>
+      </ionic-timepicker>
+      <div class="common-layout"><a class="power-btn" ng-click="OpenClose()"><i class="ion-power"></i>{{OnOff}}</a></div>
+    </div>
+  </ion-content>
+</ion-modal-view>

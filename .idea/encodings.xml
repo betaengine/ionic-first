@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/www/css/style.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/app.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/controllers.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/js/my.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/ionic/js/angular/angular-animate.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/chat-detail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/product-list.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/register.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/tab-account.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/tab-chats.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/tab-home.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/templates/tabs.html" charset="UTF-8" />
+  </component>
+</project>

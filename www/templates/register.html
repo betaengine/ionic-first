@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-header-bar align-title="left" class="bar-positive">
+    <h1 class="title">注册用户</h1>
+  </ion-header-bar>
+  <ion-content class="padding">
+
+    <form ng-submit="doRegister()">
+      <div class="list list-inset">
+        <label class="item item-input item-icon-left">
+          <i class="ion-person input-margin-right-10"></i>
+          <input type="text" placeholder="用户名" ng-model="registerData.username" required>
+        </label>
+        <label class="item item-input item-icon-left">
+          <i class="ion-locked input-margin-right-10"></i>
+          <input type="password" placeholder="密码" ng-model="registerData.password" required>
+        </label>
+        <label class="item item-input item-icon-left">
+          <i class="ion-android-phone-portrait input-margin-right-10"></i>
+          <input type="tel" placeholder="手机号码" ng-model="registerData.phone" ng-minlength="11" required>
+        </label>
+        <label class="item item-input item-icon-left">
+          <i class="ion-ios-home input-margin-right-10"></i>
+          <input type="text" placeholder="地址" ng-model="registerData.address" required>
+        </label>
+      </div>
+      <div class="text-center">已有账号?点击<a href="#/login">登录</a></div>
+      <button type="submit" class="button button-block button-positive radius-btn">注册</button>
+    </form>
+  </ion-content>
+</ion-view>
