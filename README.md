@@ -1,2 +1,1 @@
-# ionic-first
-my first ionic project
+使用Ionic做的一个Demo
