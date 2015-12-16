@@ -87,13 +87,13 @@
   text-align: center;
 }
 
-.hot-level-text {
-  color: #e42112;
-}
+/*.hot-level-text {*/
+  /*color: #e42112;*/
+/*}*/
 
-.low-level-text {
-  color: #11c1f3;
-}
+/*.low-level-text {*/
+  /*color: #11c1f3;*/
+/*}*/
 
 .normal-level-text {
   color: #f08300;

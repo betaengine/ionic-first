@@ -1,4 +1,17 @@
 angular.module('starter.services', [])
+  .constant('commonModel',{
+    //无文字加载动画
+    loadingModel: '<ion-spinner icon="circles" class="spinner-energized"></ion-spinner>',
+    //有文字加载动画
+    addLoading:'<p>绑定中</p>' + '<ion-spinner icon="circles" class="spinner-energized"></ion-spinner>',
+    //增加设备介绍
+    addIntroduce: '<input type="password"  ng-model="data.wifi">' +
+    '<p style="margin-top: 10px;">1、输入设备所连接的wifi网络的密码，输入正确手机震动一下</p>' +
+    '<p>2、绑定设备过程中耐心等待，请勿关闭应用</p>' +
+    '<p>3、设备绑定成功后，手机再次震动一下</p>'
+
+
+  })
   .factory('Users', function () {
     var users = [
       {
