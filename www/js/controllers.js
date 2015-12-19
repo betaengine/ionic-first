@@ -129,8 +129,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
       //二维码扫
       $scope.scan = function () {
         $ionicLoading.show({
-          template: commonModel.loadingModel
+          template: '<ion-spinner></ion-spinner>'
         });
+        console.log("scanCode run");
         if ($scope.currentlyScanning === true) {
           $ionicLoading.hide();
           return;
@@ -138,8 +139,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
         else if (ionic.Platform.platforms.indexOf("browser") !== -1) {
           setTimeout(function () {
             $ionicLoading.hide();
-            console.log("无法调用摄像头!!!");
-            $cordovaDialogs.alert("无法调用摄像头!!!");
+            $cordovaDialogs.alert("QR Code scanner not available in development browser.");
           }, 1000);
           return;
         }
@@ -149,13 +149,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
         $cordovaBarcodeScanner
           .scan()
           .then(function (barcodeData) {
-            console.log(barcodeData);
-            if (!barcodeData.cancelled) {
-              $cordovaDialogs.alert(barcodeData.text, '结果', 'OK');
+            if(!barcodeData.cancelled){
+              $cordovaToast.showLongCenter(barcodeData.text);
+              //$cordovaDialogs.alert(barcodeData.text, '结果', 'OK');
             }
             $ionicLoading.hide();
             $scope.currentlyScanning = false;
           }, function (error) {
+            $cordovaToast.showLongCenter('失败');
             $ionicLoading.hide();
             $scope.currentlyScanning = false;
             $cordovaDialogs.alert(error, 'barcode Error', 'OK');
