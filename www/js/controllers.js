@@ -459,8 +459,20 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
     function ($http, $cordovaAppVersion, $cordovaFileTransfer, $cordovaFileOpener2,
               $scope, $ionicPopup, $cordovaToast, Users, Settings, $location, $ionicLoading, $timeout, commonModel) {
 
+      var deploy = new Ionic.Deploy();
+      $scope.checkUpdate = function() {
+        deploy.update().then(function(res) {
+          $ionicLoading.hide();
+        }, function(err) {
+          $cordovaToast.showShortCenter('更新失败... ', err);
+        }, function(prog) {
+          $ionicLoading.show({
+            template: commonModel.loadingModel
+          });
+        });
+      };
       //检查更新
-      $scope.checkUpdate = function () {
+     /* $scope.checkUpdate = function () {
         $cordovaToast.showShortCenter('正在检查更新');
         //请求的url
         var url = '';
@@ -514,7 +526,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
           });
 
         })
-      }
+      };*/
       $scope.settings = Settings.all();
       $scope.toastText = function (text) {
         $cordovaToast.showShortCenter(text);
