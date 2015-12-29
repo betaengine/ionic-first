@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.smartcloud2782265" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.nyf.smartcloud" version="1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>万和智能服务</name>
   <description>
-        An Ionic Framework and Cordova project.
+      智能设备管理APP
     </description>
-  <author email="123@qq.com" href="http://www.baidu.com/">
-      Ionic Framework Team
+  <author email="feifeiwoye@outlook.com" href="http://www.baidu.com/">
+      飞飞我也
     </author>
   <content src="index.html"/>
   <access origin="*"/>

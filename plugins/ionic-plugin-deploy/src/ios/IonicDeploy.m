@@ -192,6 +192,7 @@ typedef struct JsonHttpResponse {
         } else {
             NSDictionary *result = self.last_update;
             NSDictionary *update = [result objectForKey:@"update"];
+            //下载url暂时未知
             NSString *download_url = [update objectForKey:@"url"];
 
             NSLog(@"update is: %@", update);
@@ -231,7 +232,6 @@ typedef struct JsonHttpResponse {
 
             NSString *filePath = [NSString stringWithFormat:@"%@/%@", libraryDirectory, @"www.zip"];
             NSString *extractPath = [NSString stringWithFormat:@"%@/%@/", libraryDirectory, uuid];
-
             NSLog(@"Path for zip file: %@", filePath);
 
             NSLog(@"Unzipping...");
@@ -350,7 +350,8 @@ typedef struct JsonHttpResponse {
 
 - (struct JsonHttpResponse) postDeviceDetails {
     NSString *baseUrl = self.deploy_server;
-    NSString *endpoint = [NSString stringWithFormat:@"/api/v1/apps/%@/updates/check/", self.appId];
+    //NSString *endpoint = [NSString stringWithFormat:@"/api/v1/apps/%@/updates/check/", self.appId];
+    NSString *endpoint = [NSString stringWithFormat:@"api/app/check"];
     NSString *url = [NSString stringWithFormat:@"%@%@", baseUrl, endpoint];
     NSDictionary* headers = @{@"Content-Type": @"application/json", @"accept": @"application/json"};
     NSString *uuid = [[NSUserDefaults standardUserDefaults] objectForKey:@"uuid"];

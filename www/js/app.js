@@ -20,6 +20,14 @@ angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
+
+      //启动极光推送服务
+
+      window.plugins.jPushPlugin.init();
+
+      //调试模式
+
+      window.plugins.jPushPlugin.setDebugMode(true);
     });
   })
 

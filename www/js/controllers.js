@@ -1,8 +1,8 @@
 //var loadingModel = '<ion-spinner icon="circles" class="spinner-energized"></ion-spinner>';
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker'])
 
-  //双击返回键退出程序
-  .run(function ($ionicPlatform, $rootScope, $location, $timeout, $ionicHistory, $cordovaToast) {
+  .run(function ($ionicPlatform, $rootScope, $location, $timeout,
+                 $ionicLoading, $ionicHistory, $cordovaToast, $ionicPopup, $window) {
     $ionicPlatform.ready(function ($rootScope) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -13,6 +13,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
         StatusBar.styleDefault();
       }
     });
+
+
     //双击退出
     $ionicPlatform.registerBackButtonAction(function (e) {
       //判断处于哪个页面时双击退出
@@ -41,6 +43,39 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
       e.preventDefault();
       return false;
     }, 101);
+
+
+    //应用启动自动检测
+    var deploy = new Ionic.Deploy();
+    deploy.check().then(function (available) {
+      if (available) {
+        $ionicPopup.confirm({
+          title: '提示',
+          template: '检测到新版本，是否更新？',
+          cancelText: '稍后',
+          okText: '更新',
+          okType: 'button-assertive'
+        }).then(function (isUpdate) {
+          if (isUpdate) {
+            $ionicLoading.show({
+              template: '<ion-spinner></ion-spinner>'
+            });
+            deploy.download().then(function () {
+              deploy.extract().then(function () {
+                deploy.load().then($window.reload());
+              }, function (error) {
+                //解压错误
+              }, function (progress) {
+                //解压进度
+              })
+            }, function (error) {
+              //下载错误
+            }, function (progress) {
+            })
+          }
+        });
+      }
+    });
   })
 
 
@@ -149,7 +184,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
         $cordovaBarcodeScanner
           .scan()
           .then(function (barcodeData) {
-            if(!barcodeData.cancelled){
+            if (!barcodeData.cancelled) {
               $cordovaToast.showLongCenter(barcodeData.text);
               //$cordovaDialogs.alert(barcodeData.text, '结果', 'OK');
             }
@@ -270,47 +305,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
         var user = Users.login(username, password);
         if (user != null) {
           $rootScope.User = user;
-          //setCookie('userName', $scope.loginData.username, 1);
           $state.go('tab.home');
-          //$scope.IsLogin = true;
-          //$scope.isInfo = true;
-          //$ionicPopup.alert(
-          //  {
-          //    title: '提示',
-          //    template: '登录成功'
-          //  }
-          //);
-          //$state.reload();
-          //$scope.$on('$stateChangeSuccess',function(){
-          //  $scope.IsLogin = true;
-          //  $scope.isInfo = true;
-          //});
-          //$scope.loginModal.hide();
         }
-        /*var link = 'http://localhost:8080/v1/user/login';
-         var data = {
-         Username: $scope.loginData.username,
-         Password: $scope.loginData.password
-         }
-
-         var p = $http({
-         url: link,
-         method: 'POST',
-         data: data,
-         dataType: 'json',
-         headers: {
-         'Content-Type': 'application/x-www-form-urlencoded'
-         }
-         });
-         p.success(function (response, status, headers, config) {
-         if (response.StatusCode == 200) {
-         $scope.IsLogin = true;
-         setCookie('username', $scope.loginData.username, 7);
-         setCookie('password', $scope.loginData.password, 7);
-         $scope.closeLogin();
-         $scope.IsQuit = false;
-         }
-         });*/
       };
 
       //注册页面
@@ -351,38 +347,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
 
           }, 1500);
         }
-        /*var link = 'http://127.0.0.1:8080/v1/user/';
-         //var data = "username=" + $scope.registerData.username + "&Password=" + $scope.registerData.password +
-         //    '&MobilePhone='+$scope.registerData.phone;
-         var data = {
-         "MobilePhone": $scope.registerData.phone,
-         "Password": $scope.registerData.password,
-         "Username": $scope.registerData.username
-         }
-         var p = $http({
-         url: link,
-         method: 'POST',
-         data: data,
-         dataType: 'json',
-         headers: {
-         'Content-Type': 'application/x-www-form-urlencoded'
-         }
-         });
-         p.success(function (response, status, headers, config) {
-         if (response.Username != null) {
-         $ionicPopup.alert({
-         title: '提示',
-         template: '用户创建成功'
-         });
-         $scope.IsLogin = true;
-         } else {
-         $ionicPopup.alert({
-         title: '提示',
-         template: response
-         });
-         }
-
-         });*/
       };
 
       //$scope.lookProduct = Products.get($stateParams.productId);
@@ -433,14 +397,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
 
 
   .controller('ChatsCtrl', function ($scope, Chats) {
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
-
     $scope.chats = Chats.all();
     $scope.remove = function (chat) {
       Chats.remove(chat);
@@ -460,73 +416,72 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'ionic-timepicker']
               $scope, $ionicPopup, $cordovaToast, Users, Settings, $location, $ionicLoading, $timeout, commonModel) {
 
       var deploy = new Ionic.Deploy();
-      $scope.checkUpdate = function() {
-        deploy.update().then(function(res) {
-          $ionicLoading.hide();
-        }, function(err) {
-          $cordovaToast.showShortCenter('更新失败... ', err);
-        }, function(prog) {
-          $ionicLoading.show({
-            template: commonModel.loadingModel
-          });
+      $scope.checkUpdate = function () {
+        $ionicLoading.show({
+          template: commonModel.loadingModel
+        });
+        deploy.update().then(function (res) {
+          if (res) {}else {}
+        }, function (err) {
+        }, function (downloadProgress) {
         });
       };
       //检查更新
-     /* $scope.checkUpdate = function () {
-        $cordovaToast.showShortCenter('正在检查更新');
-        //请求的url
-        var url = '';
-        $http.get(url).then(function (res) {
-          var serverVersion = res.version;
-          $cordovaAppVersion.getVersionNumber().then(function (clientVersion) {
-            if (clientVersion != serverVersion) {
-              var Confirm = $ionicPopup.confirm({
-                title: '提示',
-                template: '检测到新版本，是否升级？',
-                cancelText: '取消',
-                okText: '升级',
-                okType: 'button-assertive'
-              });
-              //下载并安装
-              Confirm.then(function (e) {
-                if (e) {
-                  var url = ''; //可以从服务端获取更新APP的路径
-                  var targetPath = ''; //APP下载存放的路径，可以使用cordova file插件进行相关配置
-                  var trustHosts = true; //信任
-                  var options = {};
-                  $cordovaFileTransfer.download(url, targetPath, trustHosts, options).then(function (result) {
-                    $cordovaToast.showShortCenter('下载成功');
-                    $cordovaFileOpener2.open(targetPath, 'application/vnd.android.package-archive').then(function () {
-                      $cordovaToast.showShortCenter('安装成功');
+      /* $scope.checkUpdate = function () {
+       $cordovaToast.showShortCenter('正在检查更新');
+       //请求的url
+       var url = '';
+       $http.get(url).then(function (res) {
+       var serverVersion = res.version;
+       $cordovaAppVersion.getVersionNumber().then(function (clientVersion) {
+       if (clientVersion != serverVersion) {
+       var Confirm = $ionicPopup.confirm({
+       title: '提示',
+       template: '检测到新版本，是否升级？',
+       cancelText: '取消',
+       okText: '升级',
+       okType: 'button-assertive'
+       });
+       //下载并安装
+       Confirm.then(function (e) {
+       if (e) {
+       var url = ''; //可以从服务端获取更新APP的路径
+       var targetPath = ''; //APP下载存放的路径，可以使用cordova file插件进行相关配置
+       var trustHosts = true; //信任
+       var options = {};
+       $cordovaFileTransfer.download(url, targetPath, trustHosts, options).then(function (result) {
+       $cordovaToast.showShortCenter('下载成功');
+       $cordovaFileOpener2.open(targetPath, 'application/vnd.android.package-archive').then(function () {
+       $cordovaToast.showShortCenter('安装成功');
 
-                    }, function (err) {
-                      $cordovaToast.showShortCenter('安装失败');
+       }, function (err) {
+       $cordovaToast.showShortCenter('安装失败');
 
-                    });
-                  }, function (err) {
-                    $cordovaToast.showShortCenter('下载失败');
+       });
+       }, function (err) {
+       $cordovaToast.showShortCenter('下载失败');
 
-                  }, function (progress) {
-                    $timeout(function () {
-                      downloadProgress = (progress.loaded / progress.total) * 100;
-                      $ionicLoading.show({
-                        template: '已经下载：' + Math.floor(downloadProgress) + '%'
-                      });
-                      if (downloadProgress > 99) {
-                        $ionicLoading.hide();
-                      }
-                    });
-                  });
-                } else {
-                  //取消更新
-                  $cordovaToast.showShortCenter('取消更新了');
-                }
-              });
-            }
-          });
+       }, function (progress) {
+       $timeout(function () {
+       downloadProgress = (progress.loaded / progress.total) * 100;
+       $ionicLoading.show({
+       template: '已经下载：' + Math.floor(downloadProgress) + '%'
+       });
+       if (downloadProgress > 99) {
+       $ionicLoading.hide();
+       }
+       });
+       });
+       } else {
+       //取消更新
+       $cordovaToast.showShortCenter('取消更新了');
+       }
+       });
+       }
+       });
 
-        })
-      };*/
+       })
+       };*/
       $scope.settings = Settings.all();
       $scope.toastText = function (text) {
         $cordovaToast.showShortCenter(text);

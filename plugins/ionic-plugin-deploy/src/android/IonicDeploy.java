@@ -57,7 +57,7 @@ public class IonicDeploy extends CordovaPlugin {
   String version_label = null;
   boolean ignore_deploy = false;
   JSONObject last_update;
-
+  String old_version = null;
   public static final String NO_DEPLOY_LABEL = "NO_DEPLOY_LABEL";
   public static final String NO_DEPLOY_AVAILABLE = "NO_DEPLOY_AVAILABLE";
   public static final String NOTHING_TO_IGNORE = "NOTHING_TO_IGNORE";
@@ -296,6 +296,7 @@ public class IonicDeploy extends CordovaPlugin {
     this.last_update = null;
     String ignore_version = this.prefs.getString("ionicdeploy_version_ignore", "");
     String deployed_version = this.prefs.getString("uuid", "");
+    this.old_version = deployed_version;
     String loaded_version = this.prefs.getString("loaded_uuid", "");
     JsonHttpResponse response = postDeviceDetails(deployed_version, channel_tag);
 
@@ -410,7 +411,6 @@ public class IonicDeploy extends CordovaPlugin {
 
     Integer version_count = prefs.getInt("version_count", 0) + 1;
     prefs.edit().putInt("version_count", version_count).apply();
-
     uuid = uuid + "|" + version_count.toString();
 
     Set<String> versions = this.getMyVersions();
@@ -419,6 +419,8 @@ public class IonicDeploy extends CordovaPlugin {
 
     prefs.edit().putStringSet("my_versions", versions).apply();
 
+
+    
     this.cleanupVersions();
   }
 
@@ -431,11 +433,11 @@ public class IonicDeploy extends CordovaPlugin {
 
     if (version_count > 3) {
       int threshold = version_count - 3;
-
       for (Iterator<String> i = versions.iterator(); i.hasNext();) {
         String version = i.next();
         String[] version_string = version.split("\\|");
         logMessage("VERSION", version);
+        //1
         int version_number = Integer.parseInt(version_string[1]);
         if (version_number < threshold) {
           logMessage("REMOVING", version);
@@ -649,15 +651,22 @@ public class IonicDeploy extends CordovaPlugin {
       //TODO Handle problems..
       logMessage("UNZIP_STEP", "Exception: " + e.getMessage());
     }
-
     // Save the version we just downloaded as a version on hand
-    saveVersion(upstream_uuid);
-
+    //saveVersion(upstream_uuid);
+    if (old_version != null) {
+      this.removeVersion(old_version);
+    }else{
+      logMessage("REMOVE Version:","old vension is null");
+    }
     String wwwFile = this.myContext.getFileStreamPath(zip).getAbsolutePath().toString();
     if (this.myContext.getFileStreamPath(zip).exists()) {
       String deleteCmd = "rm -r " + wwwFile;
       Runtime runtime = Runtime.getRuntime();
       try {
+        //删除旧版本数据
+        //if(old_version != null){
+        //  this.removeVersion(old_version);
+        //}
         runtime.exec(deleteCmd);
         logMessage("REMOVE", "Removed www.zip");
       } catch (IOException e) {
